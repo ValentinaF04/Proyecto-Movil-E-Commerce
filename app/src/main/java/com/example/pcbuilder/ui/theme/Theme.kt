@@ -12,25 +12,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = PCBuilderAzul,
+    onPrimary = Color.White,
+    background = PCBuilderNegro,
+    onBackground = PCBuilderBlanco,
+    surface = PCBuilderNegro,  //Fondo de las tarjetas
+    onSurface = PCBuilderBlanco,    //Texto sobre las tarjetas 
+    error = PCBuilderRojo,
+    onError = Color.White,
+    outline = PCBuilderGris,    //Borde gris 
+    secondary = PCBuilderGris,
+    onSecondary = PCBuilderBlanco
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = PCBuilderAzul, //Para botones 
+    onPrimary = Color.White,  //Texto sobre el color primario
+    background = PCBuilderBlanco, //Color de fondo 
+    onBackground = PCBuilderNegro, //Texto sobre el fondo
+    surface = PCBuilderBlanco, //Color para tarjetas y menus
+    onSurface = PCBuilderNegro, //Texto sobre superficies
+    error = PCBuilderRojo, //Color para errores
+    onError = Color.White, //Texto sobre el color de error
+    outline = PCBuilderGris,  //Borde para Textfields
+    secondary = PCBuilderGris,  //Color secundario
+    onSecondary = PCBuilderNegro  //Texto sobre el color secundario
 )
 
 @Composable
