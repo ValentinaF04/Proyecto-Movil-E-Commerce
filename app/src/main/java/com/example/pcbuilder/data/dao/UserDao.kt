@@ -1,11 +1,12 @@
-package com.example.yourapp.data.dao
+package com.example.pcbuilder.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.yourapp.data.model.User
+import com.example.pcbuilder.data.model.User
 import kotlinx.coroutines.flow.Flow
+import androidx.room.Delete
 
 @Dao
 interface UserDao {
@@ -23,4 +24,9 @@ interface UserDao {
     
     @Query("SELECT * FROM users")
     fun getAllUsers(): Flow<List<User>>
+
+    //Eliminar producto
+
+    @Delete
+    suspend fun deleteProduct(product: Product)
 }
