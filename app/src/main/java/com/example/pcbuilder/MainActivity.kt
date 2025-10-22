@@ -20,8 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PCBuilderTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    AppNavigation(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -46,4 +45,4 @@ fun GreetingPreview() {
     }
 }
 
-//Llamar a AppNavigation
+
