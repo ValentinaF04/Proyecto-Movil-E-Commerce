@@ -23,15 +23,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController 
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.pcbuilder.data.model.Producto
 import com.example.pcbuilder.ui.theme.PCBuilderTheme
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CatalogoScreen(
+    navController: NavController,
     productos: List<Producto>,
     modifier: Modifier = Modifier
 ) {
@@ -41,22 +44,25 @@ fun CatalogoScreen(
                 title = { Text("Catálogo de Productos") }
             )
         },
-        modifier = modifier 
+        modifier = modifier
     ) { paddingValues ->
 
 
         LazyVerticalGrid(
 
             columns = GridCells.Adaptive(minSize = 160.dp),
-            
+
             modifier = Modifier.padding(paddingValues),
-            
+
             contentPadding = PaddingValues(8.dp)
         ) {
             items(productos) { producto ->
                 ProductoCard(
                     producto = producto,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(8.dp),
+                    onClick = {
+                        navController.navigate("detalle/${producto.id}")
+                    }
                 )
             }
         }
@@ -65,13 +71,11 @@ fun CatalogoScreen(
 
 
 @Composable
-fun ProductoCard(producto: Producto, modifier: Modifier = Modifier) {
+fun ProductoCard(producto: Producto, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Card(
         modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        onClick = { // falta agregar la funcion onclick para mostrar los detalles del producto (en proceso)
-
-        }
+        onClick = onClick
     ) {
         Column {
             AsyncImage(
@@ -80,10 +84,10 @@ fun ProductoCard(producto: Producto, modifier: Modifier = Modifier) {
                     .crossfade(true)
                     .build(),
                 contentDescription = "Imagen de ${producto.nombre}",
-                contentScale = ContentScale.Crop, 
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1f) 
+                    .aspectRatio(1f)
             )
 
             Column(modifier = Modifier.padding(12.dp)) {
@@ -105,7 +109,7 @@ fun ProductoCard(producto: Producto, modifier: Modifier = Modifier) {
 }
 
 /**
- * Función de ayuda para generar productos 
+ * Función de ayuda para generar productos
  * falta agregarle las url de las fotos
  */
 fun obtenerDatos(): List<Producto> {
@@ -124,15 +128,23 @@ fun obtenerDatos(): List<Producto> {
 @Composable
 fun PreviewProductoCard() {
     val productoEjemplo = Producto(1, "Producto de Ejemplo", "Desc.", 99000, "")
-    PCBuilderTheme { 
-        ProductoCard(producto = productoEjemplo, modifier = Modifier.padding(8.dp))
+    PCBuilderTheme {
+        ProductoCard(
+            producto = productoEjemplo,
+            modifier = Modifier.padding(8.dp),
+            onClick = {} 
+        )
     }
 }
 
 @Preview(showBackground = true, widthDp = 360, heightDp = 640)
 @Composable
 fun PreviewCatalogoScreen() {
-    PCBuilderTheme { 
-        CatalogoScreen(productos = obtenerDatos())
+    val navController = rememberNavController() 
+    PCBuilderTheme {
+        CatalogoScreen(
+            navController = navController, 
+            productos = obtenerDatos()
+        )
     }
 }
