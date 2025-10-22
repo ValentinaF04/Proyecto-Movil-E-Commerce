@@ -114,12 +114,12 @@ fun ProductoCard(producto: Producto, modifier: Modifier = Modifier, onClick: () 
  */
 fun obtenerDatos(): List<Producto> {
     return listOf(
-        Producto(1, "Ryzen 5 5600X", "CPU", 150000, "URL FOTO PROCESADOR"),
-        Producto(2, "Nvidia RTX 3060", "GPU", 350000, "URL FOTO TARJETA GRAFICA"),
-        Producto(3, "Corsair Vengeance 16GB", "RAM", 80000, "URL FOTO RAM"),
-        Producto(4, "Samsung 980 Pro 1TB", "SSD M.2", 120000, "URL FOTO SSD"),
-        Producto(5, "ASUS B550-F", "Motherboard", 180000, "URL FOTO MOTHERBOARD"),
-        Producto(6, "NZXT H510", "Gabinete", 90000, "URL FOTO GABINETE")
+        Producto(1, "Ryzen 5 5600X", "CPU", 150000, "https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2505503-ryzen-5-5600x.jpg"),
+        Producto(2, "Nvidia RTX 3060", "GPU", 350000, "https://media.spdigital.cl/thumbnails/products/1760965689339-b3_6db8e262_c241b8a4_thumbnail_512.png"),
+        Producto(3, "Corsair Vengeance 16GB", "RAM", 80000, "https://rstech.cl/wp-content/uploads/2023/02/ram000000001.png"),
+        Producto(4, "Samsung 980 Pro 1TB", "SSD M.2", 120000, "https://m.media-amazon.com/images/I/61Mo8ug0aQS._AC_SL1500_.jpg"),
+        Producto(5, "ASUS B550-F", "Motherboard", 180000, "https://dlcdnwebimgs.asus.com/gain/803CCAEB-848C-416A-A24C-B107B9575134"),
+        Producto(6, "NZXT H510", "Gabinete", 90000, "https://i5.walmartimages.com/seo/NZXT-Case-H510-Elite-Mid-Tower-Elite-Matte-White_3870aeea-bb96-4ce8-98f1-65863ed9cab5.69c58b377d14de20883ce8302f8a18a3.jpeg")
     )
 }
 
