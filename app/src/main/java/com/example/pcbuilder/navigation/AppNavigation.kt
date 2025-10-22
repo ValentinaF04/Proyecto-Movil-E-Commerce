@@ -10,13 +10,14 @@ import com.example.pcbuilder.ui.screens.LoginScreen
 import com.example.pcbuilder.ui.screens.RegistroScreen
 
 @Composable
-fun AppNavigation(){
+fun AppNavigation(modifier: Modifier = Modifier){
 
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
         startDestination = AppRoutes.LOGIN_SCREEN
+        modifier = modifier
     ) {
         composable(route = AppRoutes.LOGIN_SCREEN) {
             LoginScreen(navController = navController)
