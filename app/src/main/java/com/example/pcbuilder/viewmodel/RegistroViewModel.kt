@@ -1,12 +1,16 @@
 package com.example.pcbuilder.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.pcbuilder.data.dao.UserDao
+import com.example.pcbuilder.data.model.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class RegistroViewModel : ViewModel(){
+class RegistroViewModel(private val userDao: UserDao) : ViewModel(){
 
     //Eventos cuando el usuario escribe en los campos
 
@@ -33,6 +37,23 @@ class RegistroViewModel : ViewModel(){
         _estado.update { it.copy(aceptaTerminos = valor) }
     }
 
+    //Funcion para guardar usuario
+    fun guardarUsuario(onSuccess: () -> Unit){
+        val estadoActual = _estado.value
+
+        val nuevoUsuario = User(
+            name = estadoActual.nombre,
+            email = estadoActual.correo,
+            password = estadoActual.clave
+        )
+
+        //corrutina para insertar en la bd
+        viewModelScope.launch {
+            userDao.insertUser(nuevoUsuario)
+            onSuccess()
+        }
+    }
+
 //Logica al registrar
 
     fun validarForm(): Boolean{
@@ -44,7 +65,7 @@ class RegistroViewModel : ViewModel(){
             estadoActual.correo.isBlank() -> "El correo es obligatorio"
             !estadoActual.correo.contains("@") -> "Formato de correo inválido"
             estadoActual.correo.length < 5 -> "El email es demasiado corto"
-            else -> null }
+            else -> null },
         clave = if (estadoActual.clave.length < 8) "La clave debe tener al menos 8 caracteres" else null,
         direccion = null
     )
