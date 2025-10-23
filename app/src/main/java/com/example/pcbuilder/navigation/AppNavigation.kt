@@ -67,5 +67,17 @@ fun AppNavigation(modifier: Modifier = Modifier){
                 productId = productIdString?.toIntOrNull()
             )
         }
+        composable(route = AppRoutes.CART_SCREEN) {
+            CartScreen(navController = navController)
+        }
+
+        composable(route = AppRoutes.CHECKOUT_SCREEN) {
+            CheckoutScreen(navController = navController)
+        }
+
+        composable(route = AppRoutes.COMPRA_EXITOSA_SCREEN) {
+            // CompraExitosaScreen(navController = navController)
+        }
+
     }
 }

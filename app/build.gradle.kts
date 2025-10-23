@@ -59,4 +59,12 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.1")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    //GPS
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+    //Autenticación Biométrica
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+    //Guardar credenciales de forma segura
+    implementation("androidx.security:security-crypto:1.0.0")
+
 }
