@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pcbuilder.ui.screens.LoginScreen 
 import com.example.pcbuilder.ui.screens.RegistroScreen
+import androidx.compose.ui.Modifier
 
 @Composable
 fun AppNavigation(modifier: Modifier = Modifier){
@@ -16,7 +17,7 @@ fun AppNavigation(modifier: Modifier = Modifier){
 
     NavHost(
         navController = navController,
-        startDestination = AppRoutes.LOGIN_SCREEN
+        startDestination = AppRoutes.LOGIN_SCREEN,
         modifier = modifier
     ) {
         composable(route = AppRoutes.LOGIN_SCREEN) {
