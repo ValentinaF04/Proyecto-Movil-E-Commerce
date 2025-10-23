@@ -4,6 +4,7 @@ object AppRoutes{
     // Rutas existentes
     const val LOGIN_SCREEN = "login"
     const val REGISTRO_SCREEN = "registro"
+    const val CATALOGO_SCREEN = "catalogo"
     const val ADMIN_DASHBOARD = "admin_dashboard"
     const val CART_SCREEN = "cart"
     const val CHECKOUT_SCREEN = "checkout"
