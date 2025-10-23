@@ -25,6 +25,8 @@ import com.example.pcbuilder.navigation.AppRoutes
 import com.example.pcbuilder.viewmodel.AppViewModelFactory
 import com.example.pcbuilder.viewmodel.LoginViewModel
 import kotlinx.coroutines.launch
+import com.example.pcbuilder.PCBuilderApplication 
+import com.example.pcbuilder.data.SessionManager
 
 //interfaz visual
 
@@ -33,10 +35,12 @@ fun LoginScreen(navController: NavController){
 
     val context = LocalContext.current
     val db = (context.applicationContext as PCBuilderApplication).database
-    val factory = AppViewModelFactory(db.userDao(), db.productDao())
+    val factory = AppViewModelFactory(db.userDao(), db.productDao(), db.cartDao)
     val viewModel: LoginViewModel = viewModel (factory = factory)
     val estado by viewModel.estado.collectAsState()
     val scope = rememberCoroutineScope()
+    //Obtener una insancia del SessionManager
+    val sessionManager = remember {SessionManager(context)}
 
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Bienvenido", style = MaterialTheme.typography.headlineMedium)
@@ -51,8 +55,11 @@ fun LoginScreen(navController: NavController){
 
         Button(onClick = {
             scope.launch {
-                viewModel.iniciarSesion { isAdmin ->
-                    val ruta = if(isAdmin){
+                viewModel.iniciarSesion { user ->
+                if(user != null){
+                    sessionManager.saveUserId(user.uid)
+    
+                    val ruta = if(user.isAdmin){
                         AppRoutes.ADMIN_DASHBOARD
                     }else{
                         AppRoutes.CATALOGO_SCREEN
@@ -62,6 +69,7 @@ fun LoginScreen(navController: NavController){
                     }
                 }
             }
+        }
         }, modifier = Modifier.fillMaxWidth()) {
             Text("Ingresar")
         }
