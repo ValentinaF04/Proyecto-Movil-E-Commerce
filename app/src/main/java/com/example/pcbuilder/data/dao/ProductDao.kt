@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.pcbuilder.data.model.Product
 import kotlinx.coroutines.flow.Flow
+import androidx.room.Delete
 
 @Dao
 interface ProductDao {
@@ -26,6 +27,9 @@ interface ProductDao {
     //Buscamos productos por su ID
     @Query("SELECT * FROM products WHERE id = :id")
     fun getProductById(id: Int): Flow<Product>
+
+    //Eliminar producto
+
     @Delete
     suspend fun deleteProduct(product: Product)
 }

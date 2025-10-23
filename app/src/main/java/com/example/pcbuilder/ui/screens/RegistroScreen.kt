@@ -26,18 +26,28 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.pcbuilder.navigation.AppRoutes
 import com.example.pcbuilder.ui.theme.PCBuilderTheme 
-import com.example.pcbuilder.viewmodel.RegistroViewModel 
+import com.example.pcbuilder.viewmodel.RegistroViewModel
+import androidx.compose.ui.platform.LocalContext 
+import com.example.pcbuilder.PCBuilderApplication 
+import com.example.pcbuilder.viewmodel.AppViewModelFactory 
+import androidx.compose.runtime.rememberCoroutineScope 
+import kotlinx.coroutines.launch
 
 //interfaz visual
 
 @Composable
 fun RegistroScreen(
-    navController: NavController,
-    viewModel: RegistroViewModel = viewModel()
+    navController: NavController
 ) {
+    val context = LocalContext.current
+    val db = (context.applicationContext as PCBuilderApplication).database
+    val factory = AppViewModelFactory(db.userDao(), db.productDao())
+
+    val viewModel: RegistroViewModel = viewModel(factory = factory)
+
     val estado by viewModel.estado.collectAsState()
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -116,9 +126,12 @@ fun RegistroScreen(
         // botón registrar
         Button(
             onClick = {
-                val registroExitoso = viewModel.validarForm()
-                if (registroExitoso) {
-                    navController.popBackStack()
+                if (viewModel.validarForm()){
+                    scope.launch{
+                        viewModel.guardarUsuario{
+                            navController.popBackStack()
+                        }
+                    }
                 }
             },
             modifier = Modifier.fillMaxWidth(),
