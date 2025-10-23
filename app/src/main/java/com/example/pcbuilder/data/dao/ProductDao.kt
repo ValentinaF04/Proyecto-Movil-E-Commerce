@@ -26,4 +26,6 @@ interface ProductDao {
     //Buscamos productos por su ID
     @Query("SELECT * FROM products WHERE id = :id")
     fun getProductById(id: Int): Flow<Product>
+    @Delete
+    suspend fun deleteProduct(product: Product)
 }
