@@ -9,11 +9,12 @@ import com.example.pcbuilder.data.dao.UserDao
 import com.example.pcbuilder.data.model.Product
 import com.example.pcbuilder.data.model.User
 
-@Database(entities = [User::class, Product::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, Product::class, CartItem::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
     abstract fun productDao(): ProductDao
+    abstract fun cartDao(): CartDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null
@@ -24,6 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "my_app_database" 
                 )
+                .fallbackToDestructiveMigration()
                 .build()
                 INSTANCE = instance
                 instance

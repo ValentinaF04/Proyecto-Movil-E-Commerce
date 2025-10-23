@@ -21,6 +21,10 @@ class AppViewModelFactory (
             @Suppress("UNCHECKED_CAST")
             return LoginViewModel(userDao) as T
         }
+        if (modelClass.isAssignableFrom(CartViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CartViewModel(cartDao, productDao) as T // Le pasamos ambos DAOs
+        }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

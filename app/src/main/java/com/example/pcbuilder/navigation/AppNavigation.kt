@@ -28,5 +28,18 @@ fun AppNavigation(modifier: Modifier = Modifier){
         composable(route = AppRoutes.REGISTRO_SCREEN) {
             RegistroScreen(navController = navController)
         }
+
+        composable(route = AppRoutes.CART_SCREEN) {
+            CartScreen(navController = navController)
+        }
+
+        composable(route = AppRoutes.CHECKOUT_SCREEN) {
+            CheckoutScreen(navController = navController)
+        }
+
+        composable(route = AppRoutes.COMPRA_EXITOSA_SCREEN) {
+            // CompraExitosaScreen(navController = navController)
+        }
+
     }
 }
