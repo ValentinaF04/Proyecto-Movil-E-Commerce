@@ -21,6 +21,17 @@ class AppViewModelFactory (
             @Suppress("UNCHECKED_CAST")
             return LoginViewModel(userDao) as T
         }
+
+        if (modelClass.isAssignableFrom(CatalogoViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CatalogoViewModel(productDao) as T
+        }
+
+
+        if (modelClass.isAssignableFrom(AdminViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return AdminViewModel(productDao) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
