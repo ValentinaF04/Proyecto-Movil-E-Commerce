@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 fun LoginScreen(navController: NavController){
 
     val context = LocalContext.current
-    val db = (context.applicationContext as MyApplication).database
+    val db = (context.applicationContext as PCBuilderApplication).database
     val factory = AppViewModelFactory(db.userDao(), db.productDao())
     val viewModel: LoginViewModel = viewModel (factory = factory)
     val estado by viewModel.estado.collectAsState()
@@ -41,8 +41,8 @@ fun LoginScreen(navController: NavController){
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Bienvenido", style = MaterialTheme.typography.headlineMedium)
 
-        OutlinedTextField(value = estado.correo, onValueChange = {}, label = { Text("Correo") })
-        OutlinedTextField(value = estado.clave, onValueChange = {}, label = { Text("Contraseña") })
+        OutlinedTextField(value = estado.correo, onValueChange = viewModel::onCorreoChange, label = { Text("Correo") })
+        OutlinedTextField(value = estado.clave, onValueChange = viewModel::onClaveChange, label = { Text("Contraseña") })
 
         //mostrar error
         if (estado.error != null){
@@ -52,10 +52,13 @@ fun LoginScreen(navController: NavController){
         Button(onClick = {
             scope.launch {
                 viewModel.iniciarSesion { isAdmin ->
-                    if (isAdmin){
-                        //admin dashboard
-                    } else{
-                        //catalogo_screen
+                    val ruta = if(isAdmin){
+                        AppRoutes.ADMIN_DASHBOARD
+                    }else{
+                        AppRoutes.CATALOGO_SCREEN
+                    }
+                    navController.navigate(ruta){
+                        popUpTo(AppRoutes.LOGIN_SCREEN) { inclusive = true }
                     }
                 }
             }
