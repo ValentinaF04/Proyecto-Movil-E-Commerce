@@ -3,6 +3,7 @@ package com.example.pcbuilder.navigation
 //Crear el navhost y enlazar las rutas a los composables LoginScreen y RegistroScreen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
