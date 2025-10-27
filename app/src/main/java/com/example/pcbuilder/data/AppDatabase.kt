@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.pcbuilder.data.dao.ProductDao
+import com.example.pcbuilder.data.dao.CartDao
+import com.example.pcbuilder.data.model.CartItem
 import com.example.pcbuilder.data.dao.UserDao
 import com.example.pcbuilder.data.model.Product
 import com.example.pcbuilder.data.model.User

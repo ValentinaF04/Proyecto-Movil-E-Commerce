@@ -8,4 +8,4 @@ data class CartItem(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val userId: Int,    
     val productId: Int, 
-    val quantity: Int   
+    val quantity: Int)
